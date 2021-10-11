@@ -1,7 +1,10 @@
 # holy-hour
 
 A site to compare the amount of bars and the amout of churches a town or city has, within a 5 mile radius.
-See review count as well as location rating, and get currently updated weather for that locatoin.
+See review count as well as location rating, and get currently updated weather for that location.
+
+![gif of site](images/holyhourgif.gif)
+
 
 
 
