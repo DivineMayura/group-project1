@@ -63,10 +63,74 @@ See review count as well as location rating, and get currently updated weather f
 
 This project is licensed under the MIT License 
 
-## Images of Site:
+## User Stories:
 
-![alt text](images/code1.jpg)
+![User Story](images/userstory.jpg)
 
-![alt text](images/code2.jpg)
+## Sample Code:
+```
+//local storage
+$(".dropdown-trigger").dropdown();
+
+var allCities = JSON.parse(localStorage.getItem("saved-city")) || [];
+
+function saveCity() {
+  allCities.unshift(searchValue);
+  showCity(searchValue);
+  localStorage.setItem("saved-city", JSON.stringify(allCities));
+}
+
+function showCity() {
+  if (allCities.length > 5) {
+    allCities.pop();
+  }
+  console.log(allCities);
+  document.getElementById("first-city").innerHTML = allCities[0];
+  document.getElementById("second-city").innerHTML = allCities[1];
+  document.getElementById("third-city").innerHTML = allCities[2];
+  document.getElementById("fourth-city").innerHTML = allCities[3];
+  document.getElementById("fifth-city").innerHTML = allCities[4];
+}
+
+var firstCityClick = document.getElementById("first-city");
+var secondCityClick = document.getElementById("second-city");
+var thirdCityClick = document.getElementById("third-city");
+var fourthCityClick = document.getElementById("fourth-city");
+var fifthCityClick = document.getElementById("fifth-city");
+
+firstCityClick.addEventListener("click", function (event) {
+  searchValue = allCities[0];
+  console.log(searchValue);
+  getYelpChurches(searchValue);
+  getYelpBars(searchValue);
+});
+```
+```
+$.ajax({
+    url: queryURL,
+    method: "GET",
+    headers: {
+      "accept": "application/json",
+      "x-requested-with": "xmlhttprequest",
+      "Access-Control-Allow-Origin": "*",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    data: {
+      term: 'Church',
+      location: searchValue
+    }, //Modal for invalid input.
+    error: function (req) { vex.dialog.alert('Invalid Search Entry. Please Keep it to City or Town names. Thank you.') }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  }).then(function (res) {
+    $("#currentIcon").remove();
+    $("#currentIcon").remove();
+    //easy way to clear weather icon to prevent duplicates from stacking up
+    
+    var churchDiv = document.getElementById("churches")
+    var churchArray = []
+
+    for (var i = 0; i < res.businesses.length; i++) {
+```
+
 
 
