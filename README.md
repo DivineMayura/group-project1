@@ -63,8 +63,13 @@ See review count as well as location rating, and get currently updated weather f
 
 This project is licensed under the MIT License 
 
-## Code:
+## User Stories:
+
+![User Story](images/userstory.jpg)
+
+## Sample Code:
 ```
+//local storage
 $(".dropdown-trigger").dropdown();
 
 var allCities = JSON.parse(localStorage.getItem("saved-city")) || [];
@@ -100,6 +105,32 @@ firstCityClick.addEventListener("click", function (event) {
   getYelpBars(searchValue);
 });
 ```
-![alt text](images/code2.jpg)
+```
+$.ajax({
+    url: queryURL,
+    method: "GET",
+    headers: {
+      "accept": "application/json",
+      "x-requested-with": "xmlhttprequest",
+      "Access-Control-Allow-Origin": "*",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    data: {
+      term: 'Church',
+      location: searchValue
+    }, //Modal for invalid input.
+    error: function (req) { vex.dialog.alert('Invalid Search Entry. Please Keep it to City or Town names. Thank you.') }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  }).then(function (res) {
+    $("#currentIcon").remove();
+    $("#currentIcon").remove();
+    //easy way to clear weather icon to prevent duplicates from stacking up
+    
+    var churchDiv = document.getElementById("churches")
+    var churchArray = []
+
+    for (var i = 0; i < res.businesses.length; i++) {
+```
+
 
 
