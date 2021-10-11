@@ -63,10 +63,43 @@ See review count as well as location rating, and get currently updated weather f
 
 This project is licensed under the MIT License 
 
-## Images of Site:
+## Code:
+```
+$(".dropdown-trigger").dropdown();
 
-![alt text](images/code1.jpg)
+var allCities = JSON.parse(localStorage.getItem("saved-city")) || [];
 
+function saveCity() {
+  allCities.unshift(searchValue);
+  showCity(searchValue);
+  localStorage.setItem("saved-city", JSON.stringify(allCities));
+}
+
+function showCity() {
+  if (allCities.length > 5) {
+    allCities.pop();
+  }
+  console.log(allCities);
+  document.getElementById("first-city").innerHTML = allCities[0];
+  document.getElementById("second-city").innerHTML = allCities[1];
+  document.getElementById("third-city").innerHTML = allCities[2];
+  document.getElementById("fourth-city").innerHTML = allCities[3];
+  document.getElementById("fifth-city").innerHTML = allCities[4];
+}
+
+var firstCityClick = document.getElementById("first-city");
+var secondCityClick = document.getElementById("second-city");
+var thirdCityClick = document.getElementById("third-city");
+var fourthCityClick = document.getElementById("fourth-city");
+var fifthCityClick = document.getElementById("fifth-city");
+
+firstCityClick.addEventListener("click", function (event) {
+  searchValue = allCities[0];
+  console.log(searchValue);
+  getYelpChurches(searchValue);
+  getYelpBars(searchValue);
+});
+```
 ![alt text](images/code2.jpg)
 
 
